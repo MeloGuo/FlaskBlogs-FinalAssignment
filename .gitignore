@@ -3,6 +3,7 @@
 
 ib64
 __pycache__
+*.pyc
 
 # Installer logs
 pip-log.txt
