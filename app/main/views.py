@@ -1,12 +1,14 @@
+import os
 from flask import render_template, redirect, url_for, abort, flash, request,\
     current_app, make_response
 from flask_login import login_required, current_user
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm
+    CommentForm, AvatarForm
 from .. import db
 from ..models import Role, User, Permission, Post, Comment
 from ..decorators import admin_required, permission_required
+from werkzeug.utils import secure_filename
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -59,7 +61,25 @@ def edit_profile():
     form.name.data = current_user.name
     form.location.data = current_user.location
     form.about_me.data = current_user.about_me
-    return render_template('edit_profile.jinja2', form=form)
+    return render_template('edit_profile.jinja2', form=form, user=current_user)
+
+@main.route('/edit-profile/avatar', methods=['GET', 'POST'])
+@login_required
+def edit_profile_avatar():
+    form = AvatarForm()
+    if form.validate_on_submit():
+        file = form.file.data
+        filename = secure_filename(file.filename)
+        filepath = '/{}/{}_{}'.format(current_app.config['FLASKY_ROOT_PATH'],
+                                      current_user.username, file.filename)
+        if current_user.avatar is not None:
+            os.remove(current_user.avatar)
+        file.save(filepath)
+        current_user.avatar = "../static/avatar/{}_{}".format(current_user.username, filename)
+        db.session.add(current_user)
+        flash('New Avatar!')
+        return redirect(url_for('.user', username=current_user.username))
+    return render_template('edit_profile_avatar.jinja2', form=form, user=current_user)
 
 @main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
 @login_required

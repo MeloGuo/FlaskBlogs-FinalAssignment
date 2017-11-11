@@ -1,4 +1,5 @@
 from . import db
+import os
 import hashlib
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -76,6 +77,7 @@ class User(UserMixin, db.Model):
                                lazy='dynamic',
                                cascade='all, delete-orphan')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+    avatar = db.Column(db.String(128), default=None)
 
     @staticmethod
     def generate_fake(count=100):
