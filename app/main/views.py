@@ -1,4 +1,6 @@
 import os
+import time
+import hashlib
 from flask import render_template, redirect, url_for, abort, flash, request,\
     current_app, make_response
 from flask_login import login_required, current_user
@@ -68,14 +70,20 @@ def edit_profile():
 def edit_profile_avatar():
     form = AvatarForm()
     if form.validate_on_submit():
+        avatar_dir = 'app/static/avatar/' + current_user.username
+        if current_user.avatar is None:
+            os.mkdir(avatar_dir)
+        else:
+            os.remove("app/"+current_user.avatar)
         file = form.file.data
-        filename = secure_filename(file.filename)
-        filepath = '/{}/{}_{}'.format(current_app.config['FLASKY_ROOT_PATH'],
-                                      current_user.username, file.filename)
-        if current_user.avatar is not None:
-            os.remove(current_user.avatar)
+
+        '''safe_filename = secure_filename(file.filename)'''
+
+        safe_filename = hashlib.md5(file.filename + str(time.time())).hexdigest()[:15]
+        filepath = '/{}/{}/{}_{}'.format(current_app.config['FLASKY_ROOT_PATH'],
+                    current_user.username, current_user.username, safe_filename)
         file.save(filepath)
-        current_user.avatar = "../static/avatar/{}_{}".format(current_user.username, filename)
+        current_user.avatar = url_for('static', filename=("avatar/"+current_user.username+"/"+current_user.username+"_"+safe_filename))
         db.session.add(current_user)
         flash('New Avatar!')
         return redirect(url_for('.user', username=current_user.username))
