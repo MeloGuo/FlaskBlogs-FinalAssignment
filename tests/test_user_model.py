@@ -184,3 +184,12 @@ class UserModelTestCase(unittest.TestCase):
         db.session.delete(u2)
         db.session.commit()
         self.assertTrue((Follow.query.count() == 1))
+
+    def test_avatar(self):
+        u1 = User(email="guo@example.com", password="cat")
+        u2 = User(email="guo1@example.com", password="cat1", avatar="avatar")
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()
+        self.assertIsNone(u1.avatar)
+        self.assertIsNotNone(u2.avatar)
