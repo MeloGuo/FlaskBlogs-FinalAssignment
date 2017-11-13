@@ -1,0 +1,10 @@
+{% extends "base.jinja2" %}
+
+{% block title %}Flasky - {{ code }}: {{ name }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>{{ code }}: {{ name }}</h1>
+    <p>{{ description }}</p>
+</div>
+{% endblock %}
