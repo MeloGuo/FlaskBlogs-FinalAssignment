@@ -185,6 +185,7 @@ class UserModelTestCase(unittest.TestCase):
         db.session.commit()
         self.assertTrue((Follow.query.count() == 1))
 
+
     def test_avatar(self):
         u1 = User(email="guo@example.com", password="cat")
         u2 = User(email="guo1@example.com", password="cat1", avatar="avatar")
@@ -193,3 +194,13 @@ class UserModelTestCase(unittest.TestCase):
         db.session.commit()
         self.assertIsNone(u1.avatar)
         self.assertIsNotNone(u2.avatar)
+
+    def test_to_json(self):
+        u = User(email='guo@example.com', password='cat')
+        db.session.add(u)
+        db.session.commit()
+        json_user = u.to_json()
+        expected_keys = ['url', 'username', 'member_since', 'last_seen',
+                         'posts', 'followed_posts', 'post_count']
+        self.assertTrue('api/v1.0/users/' in json_user['url'])
+
