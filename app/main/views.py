@@ -78,7 +78,7 @@ def edit_profile_avatar():
         file = form.file.data
 
         '''safe_filename = secure_filename(file.filename)'''
-
+        hashlib.md5(file.filename.encode("utf8"))
         safe_filename = hashlib.md5(file.filename + str(time.time())).hexdigest()[:15]
         filepath = '/{}/{}/{}_{}'.format(current_app.config['FLASKY_ROOT_PATH'],
                     current_user.username, current_user.username, safe_filename)
@@ -271,5 +271,5 @@ def write_articles():
         post = Post(body=form.body.data,
                     author=current_user._get_current_object())
         db.session.add(post)
-        return redirect(url_for('.post'), id=post.id)
+        return redirect(url_for('.index'))
     return render_template('write_post.jinja2', form=form)
