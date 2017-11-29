@@ -2,11 +2,11 @@ import os
 import time
 import hashlib
 from flask import render_template, redirect, url_for, abort, flash, request,\
-    current_app, make_response
+    current_app, make_response, request
 from flask_login import login_required, current_user
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm, AvatarForm
+    CommentForm, AvatarForm, WriteForm
 from .. import db
 from ..models import Role, User, Permission, Post, Comment
 from ..decorators import admin_required, permission_required
@@ -144,8 +144,8 @@ def edit(id):
     if current_user != post.author and \
         not current_user.can(Permission.ADMINISTER):
         abort(403)
-    form = PostForm()
-    if form.validate_on_submit():
+    form = WriteForm()
+    if request.method == 'POST':
         post.body = form.body.data
         db.session.add(post)
         flash('The post has been updated.')
@@ -264,3 +264,12 @@ def moderate_disable(id):
     return redirect(url_for('.moderate',
                             page=request.args.get('page', 1, type=int)))
 
+@main.route('/write', methods=['GET', 'POST'])
+def write_articles():
+    form = WriteForm()
+    if request.method == 'POST':
+        post = Post(body=form.body.data,
+                    author=current_user._get_current_object())
+        db.session.add(post)
+        return redirect(url_for('.post'), id=post.id)
+    return render_template('write_post.jinja2', form=form)

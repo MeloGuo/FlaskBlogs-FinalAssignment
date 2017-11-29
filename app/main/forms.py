@@ -1,3 +1,4 @@
+#-*-coding:utf-8-*-
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
     SubmitField
@@ -58,3 +59,7 @@ class CommentForm(FlaskForm):
 class AvatarForm(FlaskForm):
     file = FileField(validators=[FileRequired()])
     submit = SubmitField('Submit')
+
+class WriteForm(FlaskForm):
+    body = TextAreaField(u'正文')
+    submit = SubmitField(u'提交')
