@@ -273,3 +273,13 @@ def write_articles():
         db.session.add(post)
         return redirect(url_for('.index'))
     return render_template('write_post.jinja2', form=form)
+
+@main.route('/delete/<int:id>', methods=['GET'])
+def delete_article(id):
+    post = Post.query.get_or_404(id)
+    if current_user != post.author:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Delete successful')
+    return redirect(url_for('.index'))

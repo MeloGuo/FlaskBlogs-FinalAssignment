@@ -2,16 +2,24 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% import "_macros.jinja2" as macros %}
 
-{% block title %}Flasky{% endblock %}
+{% block title %}要完{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
+    <h1>你好, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}新用户{% endif %}!</h1>
 </div>
-<div>
-    {% if current_user.can(Permission.WRITE_ARTICLES) %}
-    {{ wtf.quick_form(form) }}
-    {% endif %}
+<div class="container">
+    <div class="row navber">
+        <div class="col-md-1">
+            <img src="{{ current_user.avatar }}" width="50" height="50">
+        </div>
+        <div class="col-md-1">
+            <a href="{{ url_for('main.write_articles') }}">写文章</a>
+        </div>
+        <div class="col-md-1">
+            <a href="#">分享链接</a>
+        </div>
+    </div>
 </div>
 <div class="post-tabs">
     <ul class="nav nav-tabs">
