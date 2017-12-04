@@ -4,36 +4,60 @@
 
 {% block title %}要完{% endblock %}
 
-{% block page_content %}
-<div class="page-header">
-    <h1>你好, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}新用户{% endif %}!</h1>
+{% block content %}
+{{ super() }}
+<div class="row">
+    <div class="page-header col-md-6 col-md-offset-2">
+        <h1>你好, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}新用户{% endif %}!</h1>
+    </div>
 </div>
-<div class="container">
-    <div class="row navber">
+<div class="row">
+    {% if current_user.is_authenticated %}
+    <div class="col-md-6 col-md-offset-2 mytitle">
         <div class="col-md-1">
+            {% if current_user.avatar %}
             <img src="{{ current_user.avatar }}" width="50" height="50">
+            {% else %}
+            <img class="img-rounded" src="{{ current_user.gravatar(size=50) }}">
+            {% endif %}
         </div>
-        <div class="col-md-1">
-            <a href="{{ url_for('main.write_articles') }}">写文章</a>
+        <div class="col-md-2 mytitle-item">
+            <a href="{{ url_for('main.write_articles') }}">
+                <i class="fa fa-wpforms" aria-hidden="true"></i>
+                写文章
+            </a>
         </div>
-        <div class="col-md-1">
-            <a href="#">分享链接</a>
+        <div class="col-md-2 mytitle-item sharelink" >
+            <a href="#">
+                <i class="fa fa-link" aria-hidden="true"></i>
+                分享链接
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    <div class="ad">
+        <div class="ad1" style='background-image: url("https://user-gold-cdn.xitu.io/15119474584535eb95a0ce20c26df01e3746b9c924405.jpg"); background-size: cover;'>
+        </div>
+        <div class="ad2" style='background-image: url("https://user-gold-cdn.xitu.io/151153973483768ab69ddd1e6c9679a46b172d55d16d2.jpg"); background-size: cover;'>
         </div>
     </div>
 </div>
-<div class="post-tabs">
-    <ul class="nav nav-tabs">
-        <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">All</a></li>
-        {% if current_user.is_authenticated %}
-        <li{% if show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">Followers</a></li>
-        {% endif %}
-    </ul>
-    {% include '_posts.jinja2' %}
+<div class="row">
+    <div class="post-tabs col-md-6 col-md-offset-2">
+        <ul class="nav nav-tabs">
+            <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">热门</a></li>
+            {% if current_user.is_authenticated %}
+            <li{% if show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">我关注的</a></li>
+            {% endif %}
+        </ul>
+        {% include '_posts.jinja2' %}
+    </div>
 </div>
 {% if pagination %}
 <div class="pagination">
     {{ macros.pagination_widget(pagination, '.index') }}
 </div>
+
 {% endif %}
 {% endblock %}
 

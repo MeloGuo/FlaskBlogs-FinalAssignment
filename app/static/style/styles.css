@@ -1,4 +1,13 @@
-.profile-thumbnail {
+/*导航头像*/
+div.mynavbar .profile-thumbnail {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    top: 2px;
+    left: 5px;
+}
+/*导航头像^^^^*/
+.profile-thumbnail{
     position: absolute;
 }
 .profile-header {
@@ -104,4 +113,144 @@ div.flask-pagedown-preview h3 {
 }
 .table.followers tr {
     border-bottom: 1px solid #e0e0e0;
+}
+/*自定义*/
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    height: 100%;
+    width: 100%;
+}
+body{
+    height: 100%;
+    width: 100%;
+    background: #F2F3F3;
+}
+/*导航栏*/
+div.mynavbar{
+    height: 60px;
+    background-color: #ffffff;
+    border-bottom: 1px solid darkgray;
+}
+a.navbar-brand{
+    padding-right: 5px;
+}
+a.logo > img{
+    width: 50px;
+    height: 50px;
+}
+#brand{
+    cursor: pointer;
+}
+/*flash消息*/
+div.flash{
+    transition:all 0.5s;
+}
+/*个人快捷栏*/
+div.mytitle{
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+    height: 50px;
+}
+div.mytitle-item{
+    margin-top: 25px;
+    transform: translateY(-60%);
+}
+div.sharelink{
+    margin-left: -10px;
+}
+/*广告*/
+div.ad1{
+    width: 240px;
+    height: 200px;
+    position: fixed;
+}
+div.ad2{
+    width: 240px;
+    height: 200px;
+    position: fixed;
+    top: 440px;
+}
+div.ad{
+    position: absolute;
+    margin-left: 70%;
+}
+/*首页文章列表*/
+div.post-tabs {
+    margin-top: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+ul.posts {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+    border-top: 1px solid #e0e0e0;
+}
+div.post-tabs ul.posts {
+    margin: 0px;
+    border-top: none;
+}
+ul.comments {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.comments li.comment {
+    margin-left: 32px;
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+ul.comments li.comment:nth-child(1) {
+    border-top: 1px solid #e0e0e0;
+}
+ul.comments li.comment:hover {
+    background-color: #f0f0f0;
+}
+div.comment-date {
+    float: right;
+}
+div.comment-author {
+    font-weight: bold;
+}
+div.comment-thumbnail {
+    position: absolute;
+}
+div.comment-content {
+    margin-left: 48px;
+    min-height: 48px;
+}
+div.comment-form {
+    margin: 16px 0px 16px 32px;
+}
+ul.posts li.post {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+ul.posts li.post:hover {
+    background-color: #f0f0f0;
+}
+div.post-date {
+    float: right;
+}
+div.post-author {
+    font-weight: bold;
+}
+div.post-thumbnail {
+    position: absolute;
+}
+div.post-content {
+    margin-left: 48px;
+    min-height: 48px;
+}
+div.post-footer {
+    text-align: right;
+}
+div.pagination {
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
 }
