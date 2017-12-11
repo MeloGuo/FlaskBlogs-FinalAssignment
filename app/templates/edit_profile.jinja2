@@ -1,11 +1,11 @@
 {% extends "base.jinja2" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Flasky - Edit Profile{% endblock %}
+{% block title %}要完 - 编辑个人资料{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Edit Your Profile</h1>
+    <h1>编辑个人资料</h1>
 </div>
 <div class="container">
     <div class="col-lg-4">
@@ -19,7 +19,7 @@
         {% endif %}
     </div>
     <div class="col-lg-4">
-        <a class="btn btn-default" href="{{ url_for('main.edit_profile_avatar') }}">Change Avatar</a>
+        <a class="btn btn-default" href="{{ url_for('main.edit_profile_avatar') }}">更换头像</a>
     </div>
 </div>
 {% endblock %}

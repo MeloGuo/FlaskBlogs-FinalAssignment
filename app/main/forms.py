@@ -9,19 +9,19 @@ from ..models import Role, User
 from flask_pagedown.fields import PageDownField
 
 class NameForm(FlaskForm):
-    name = StringField('What is your name?', validators=[Required()])
-    submit = SubmitField('Submit')
+    name = StringField(u'你的名字是?', validators=[Required()])
+    submit = SubmitField(u'提交')
 
 class EditProfileForm(FlaskForm):
-    name = StringField('Real name', validators=[Length(0, 64)])
-    location = StringField('Location', validators=[Length(0, 64)])
-    about_me = TextAreaField('About me')
-    submit = SubmitField('Submit')
+    name = StringField(u'真实姓名', validators=[Length(0, 64)])
+    location = StringField(u'地址', validators=[Length(0, 64)])
+    about_me = TextAreaField(u'关于我')
+    submit = SubmitField(u'提交')
 
 class EditProfileAdminForm(FlaskForm):
-    email = StringField('Email', validators=[Required(), Length(1, 64),
+    email = StringField(u'邮箱', validators=[Required(), Length(1, 64),
                                              Email()])
-    username = StringField('Username', validators=[
+    username = StringField(u'用户名', validators=[
         Required(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                           'Usernames must have only letters, '
                                           'numbers, dots or unserscores')])
@@ -53,12 +53,12 @@ class PostForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class CommentForm(FlaskForm):
-    body = StringField('Enter your comment', validators=[Required()])
-    submit = SubmitField('Submit')
+    body = StringField(u'输入你的评论', validators=[Required()])
+    submit = SubmitField(u'提交')
 
 class AvatarForm(FlaskForm):
     file = FileField(validators=[FileRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField(u'提交')
 
 class WriteForm(FlaskForm):
     title = StringField(u'标题')
