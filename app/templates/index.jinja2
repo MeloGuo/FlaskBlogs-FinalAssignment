@@ -50,7 +50,7 @@
             <li{% if show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">我关注的</a></li>
             {% endif %}
         </ul>
-        {% include '_posts.jinja2' %}
+        {% include '_posts-index.jinja2' %}
     </div>
 </div>
 {% if pagination %}

@@ -15,12 +15,7 @@
             <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>
             <div class="post-author"><a href="{{ url_for('.user', username=post.author.username) }}">{{ post.author.username }}</a></div>
             <div class="post-body">
-                <h1 style="font-size: 28px;">{{ post.title }}</h1>
-                {% if post.body_html %}
-                    {{ post.body_html }}
-                {% else %}
-                    {{ post.body }}
-                {% endif %}
+                <h1><a href="{{ url_for('.post', id=post.id) }}" style="color: #000;">{{ post.title }}</a></h1>
             </div>
              <div class="post-footer">
                 {% if current_user == post.author %}

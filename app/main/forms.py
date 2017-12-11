@@ -61,5 +61,6 @@ class AvatarForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class WriteForm(FlaskForm):
+    title = StringField(u'标题')
     body = TextAreaField(u'正文')
     submit = SubmitField(u'提交')
