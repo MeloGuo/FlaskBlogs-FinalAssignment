@@ -17,7 +17,6 @@
 
 即可访问```http://127.0.0.1:5000/```
 
-----
 #### 更新日志
 - v1.0 部署上线腾讯云 2017.11.20
 - v0.9 编写api接口 2017.11.13
@@ -30,7 +29,6 @@
 - v0.2 增加用户认证功能 2017.11.08
 - v0.1 基础框架 2017.11.07
 
-----
 #### API接口
 - http://localhost:5000/api/v1.0/posts/
 
@@ -45,3 +43,7 @@
 - http://localhost:5000/api/v1.0/comments/\<int:id>/
 
 - http://localhost:5000/api/v1.0/posts/\<int:id>/comments/    [methods POST]
+
+#### TODO
+- 完善API，随后进行前后端分离。
+- 使用Vue.js编写前端
